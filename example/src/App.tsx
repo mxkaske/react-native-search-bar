@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ReanimatedExpoBuilderBob from 'react-native-reanimated-expo-builder-bob';
+import ReanimatedExpoBuilderBob from 'reanimated-expo-builder-bob';
 
 export default function App() {
   return (

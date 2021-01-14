@@ -1,6 +1,6 @@
 {
-  "name": "react-native-reanimated-expo-builder-bob-example",
-  "description": "Example app for react-native-reanimated-expo-builder-bob",
+  "name": "reanimated-expo-builder-bob-example",
+  "description": "Example app for reanimated-expo-builder-bob",
   "version": "0.0.1",
   "private": true,
   "main": "index",

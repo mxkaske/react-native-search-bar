@@ -1,4 +1,4 @@
-# react-native-reanimated-expo-builder-bob (Boilerplate)
+# reanimated-expo-builder-bob (Boilerplate)
 
 **This is not a real package**
 
@@ -13,13 +13,13 @@ reanimated2 + expo + react-native-builder-bob
 ## Installation
 
 ```sh
-npm install react-native-reanimated-expo-builder-bob
+npm install reanimated-expo-builder-bob
 ```
 
 ## Usage
 
 ```js
-import AnimatedComponent from 'react-native-reanimated-expo-builder-bob';
+import AnimatedComponent from 'reanimated-expo-builder-bob';
 
 // ...
 

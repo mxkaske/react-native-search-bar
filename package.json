@@ -1,5 +1,5 @@
 {
-  "name": "react-native-reanimated-expo-builder-bob",
+  "name": "reanimated-expo-builder-bob",
   "version": "0.1.0",
   "description": "reanimated2 + expo",
   "main": "lib/commonjs/index",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-reanimated-expo-builder-bob.podspec",
+    "reanimated-expo-builder-bob.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/maximiliankaske/react-native-reanimated-expo-builder-bob",
+  "repository": "https://github.com/maximiliankaske/reanimated-expo-builder-bob",
   "author": "Maximilian Kaske <maximilian@kaske.org> (https://github.com/maximiliankaske)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maximiliankaske/react-native-reanimated-expo-builder-bob/issues"
+    "url": "https://github.com/maximiliankaske/reanimated-expo-builder-bob/issues"
   },
-  "homepage": "https://github.com/maximiliankaske/react-native-reanimated-expo-builder-bob#readme",
+  "homepage": "https://github.com/maximiliankaske/reanimated-expo-builder-bob#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
