@@ -1,0 +1,22 @@
+{
+  "name": "react-native-reanimated-expo-builder-bob-example",
+  "displayName": "ReanimatedExpoBuilderBob Example",
+  "expo": {
+    "name": "react-native-reanimated-expo-builder-bob-example",
+    "slug": "react-native-reanimated-expo-builder-bob-example",
+    "description": "Example app for react-native-reanimated-expo-builder-bob",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
