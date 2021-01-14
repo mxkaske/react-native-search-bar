@@ -1,6 +1,14 @@
-# react-native-reanimated-expo-builder-bob
+# react-native-reanimated-expo-builder-bob (Boilerplate)
 
-reanimated2 + expo
+**This is not a real package**
+
+reanimated2 + expo + react-native-builder-bob
+
+## Props
+
+- [react-native-builder-bob](https://github.com/callstack/react-native-builder-bob)
+- [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)
+- [expo](https://expo.io)
 
 ## Installation
 
@@ -11,11 +19,17 @@ npm install react-native-reanimated-expo-builder-bob
 ## Usage
 
 ```js
-import ReanimatedExpoBuilderBob from "react-native-reanimated-expo-builder-bob";
+import AnimatedComponent from 'react-native-reanimated-expo-builder-bob';
 
 // ...
 
-const result = await ReanimatedExpoBuilderBob.multiply(3, 7);
+const YourComponent = () => {
+  return (
+    <View style={styles.container}>
+      <AnimatedComponent />
+    </View>
+  );
+};
 ```
 
 ## Contributing
