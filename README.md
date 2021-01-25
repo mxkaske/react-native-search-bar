@@ -1,4 +1,4 @@
-# reanimated-expo-builder-bob (Boilerplate)
+# react-native-search-bar (Boilerplate)
 
 **This is not a real package**
 
@@ -13,13 +13,13 @@ reanimated2 + expo + react-native-builder-bob
 ## Installation
 
 ```sh
-npm install reanimated-expo-builder-bob
+npm install react-native-search-bar
 ```
 
 ## Usage
 
 ```js
-import AnimatedComponent from 'reanimated-expo-builder-bob';
+import AnimatedComponent from 'react-native-search-bar';
 
 // ...
 

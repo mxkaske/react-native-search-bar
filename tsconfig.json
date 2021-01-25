@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "reanimated-expo-builder-bob": ["./src/index"]
+      "react-native-search-bar": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

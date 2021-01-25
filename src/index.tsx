@@ -32,3 +32,6 @@ const style = StyleSheet.create({
 });
 
 export default AnimatedComponent;
+
+export { SearchBar } from './components/searchbar';
+export { StickyBar } from './components/stickybar';

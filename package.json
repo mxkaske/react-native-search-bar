@@ -1,5 +1,5 @@
 {
-  "name": "reanimated-expo-builder-bob",
+  "name": "react-native-search-bar",
   "version": "0.1.0",
   "description": "reanimated2 + expo",
   "main": "lib/commonjs/index",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "reanimated-expo-builder-bob.podspec",
+    "react-native-search-bar.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/maximiliankaske/reanimated-expo-builder-bob",
+  "repository": "https://github.com/maximiliankaske/react-native-search-bar",
   "author": "Maximilian Kaske <maximilian@kaske.org> (https://github.com/maximiliankaske)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maximiliankaske/reanimated-expo-builder-bob/issues"
+    "url": "https://github.com/maximiliankaske/react-native-search-bar/issues"
   },
-  "homepage": "https://github.com/maximiliankaske/reanimated-expo-builder-bob#readme",
+  "homepage": "https://github.com/maximiliankaske/react-native-search-bar#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
