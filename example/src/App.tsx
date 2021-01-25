@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ReanimatedExpoBuilderBob from 'reanimated-expo-builder-bob';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import Home from './screens/Home';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ReanimatedExpoBuilderBob />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.safeAreaContainer} />
+      <Home />
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  safeAreaContainer: {
+    backgroundColor: 'black',
   },
 });

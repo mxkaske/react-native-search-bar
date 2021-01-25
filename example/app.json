@@ -1,10 +1,10 @@
 {
-  "name": "reanimated-expo-builder-bob-example",
-  "displayName": "ReanimatedExpoBuilderBob Example",
+  "name": "react-native-search-bar-example",
+  "displayName": "ReactNativeSearchBar Example",
   "expo": {
-    "name": "reanimated-expo-builder-bob-example",
-    "slug": "reanimated-expo-builder-bob-example",
-    "description": "Example app for reanimated-expo-builder-bob",
+    "name": "react-native-search-bar-example",
+    "slug": "react-native-search-bar-example",
+    "description": "Example app for react-native-search-bar",
     "privacy": "public",
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],

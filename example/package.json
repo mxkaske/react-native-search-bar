@@ -1,6 +1,6 @@
 {
-  "name": "reanimated-expo-builder-bob-example",
-  "description": "Example app for reanimated-expo-builder-bob",
+  "name": "react-native-search-bar-example",
+  "description": "Example app for react-native-search-bar",
   "version": "0.0.1",
   "private": true,
   "main": "index",
@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.3",
     "expo": "^40.0.0",
     "expo-splash-screen": "~0.8.1",
     "react": "16.13.1",
@@ -19,6 +20,7 @@
     "react-native": "0.63.4",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-reanimated": "2.0.0-rc.0",
+    "react-native-safe-area-context": "^3.1.9",
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.14.9"
   },
