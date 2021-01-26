@@ -1,12 +1,14 @@
 import type {
   NativeSyntheticEvent,
   StyleProp,
+  TextInput,
   TextInputFocusEventData,
   TextInputProps,
   ViewProps,
 } from 'react-native';
 
 export interface SearchBarProps extends TextInputProps {
+  ref: React.Ref<TextInput>;
   searchIcon: React.ReactNode;
   clearIcon: React.ReactNode;
   //showLoading: boolean //ActivityIndicator

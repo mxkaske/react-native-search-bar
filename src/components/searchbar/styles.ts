@@ -19,8 +19,6 @@ export const styles = StyleSheet.create({
   },
   clearIconContainer: {
     marginLeft: 8,
-    borderWidth: 1,
-    borderRadius: 16,
   },
   cancelButtonContainer: {
     position: 'absolute',
