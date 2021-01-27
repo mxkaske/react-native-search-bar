@@ -12,6 +12,16 @@ import faker from 'faker';
 
 const Home = () => {
   const inputRef = React.useRef<TextInput>(null);
+  const [value, setValue] = React.useState('');
+
+  const icons = [
+    { name: 'bookmark', onPress: () => setValue((text) => `${text}, is:`) },
+    { name: 'at-sign', onPress: () => setValue((text) => `${text}, is:`) },
+    { name: 'bar-chart-2', onPress: () => setValue((text) => `${text}, is:`) },
+    { name: 'star', onPress: () => setValue((text) => `${text}, is:`) },
+    { name: 'trash-2', onPress: () => setValue((text) => `${text}, is:`) },
+  ];
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -24,11 +34,28 @@ const Home = () => {
         placeholder="Type here..."
         onClear={() => console.log('clear')}
         autoCorrect={false}
+        value={value}
+        onChangeText={(text) => setValue(text)}
       />
-      <ScrollView style={styles.container} keyboardDismissMode="on-drag">
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        keyboardDismissMode="on-drag"
+      >
         <Text>{faker.lorem.paragraphs(8)}</Text>
       </ScrollView>
-      <StickyBar inputRef={inputRef} />
+      <StickyBar inputRef={inputRef} containerStyle={styles.stickyBarStyle}>
+        {icons.map(({ name, onPress }) => (
+          <Feather.Button
+            //@ts-expect-error
+            name={name}
+            onPress={onPress}
+            color="white"
+            backgroundColor="black"
+            iconStyle={styles.iconStyle}
+          />
+        ))}
+      </StickyBar>
     </KeyboardAvoidingView>
   );
 };
@@ -36,12 +63,18 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  contentContainer: {
     padding: 16,
   },
   KeyboardAvoidingContainer: {
     flex: 1,
     backgroundColor: 'gold',
   },
+  stickyBarStyle: {
+    height: 50,
+  },
+  iconStyle: { marginRight: 0 },
 });
 
 export default Home;

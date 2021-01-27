@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Keyboard,
-  KeyboardEventListener,
-} from 'react-native';
+import { View, Keyboard, KeyboardEventListener } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -14,7 +9,7 @@ import { useComponentLayout } from '../../hooks';
 import { styles } from './styles';
 import type { StickyBarProps } from './types';
 
-const StickyBar = ({ inputRef }: StickyBarProps) => {
+const StickyBar = ({ inputRef, children, containerStyle }: StickyBarProps) => {
   const { layout, onLayout } = useComponentLayout();
   const focus = useSharedValue(false);
 
@@ -50,16 +45,10 @@ const StickyBar = ({ inputRef }: StickyBarProps) => {
     <View>
       <Animated.View style={animatedBackgroundContainerStyle} />
       <Animated.View
-        style={[animatedContainer, styles.container]}
+        style={[animatedContainer, styles.container, containerStyle]}
         onLayout={onLayout}
       >
-        {['chartreuse', 'darkorange', 'lightskyblue', 'mediumslateblue'].map(
-          (color, idx) => (
-            <TouchableOpacity key={idx}>
-              <View style={[styles.dot, { backgroundColor: color }]} />
-            </TouchableOpacity>
-          )
-        )}
+        {children}
       </Animated.View>
     </View>
   );
