@@ -1,41 +1,67 @@
 import React from 'react';
-import { View, TouchableOpacity, Keyboard } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Keyboard,
+  KeyboardEventListener,
+} from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { useComponentLayout } from '../../hooks';
 import { styles } from './styles';
 import type { StickyBarProps } from './types';
 
 const StickyBar = ({ inputRef }: StickyBarProps) => {
-  const [isFocused, setIsFocused] = React.useState(false);
+  const { layout, onLayout } = useComponentLayout();
+  const focus = useSharedValue(false);
 
-  const subscribe = React.useCallback(() => {
+  const subscribe: KeyboardEventListener = React.useCallback(() => {
     // @ts-expect-error
-    const focus = inputRef?.current?.isFocused();
-    setIsFocused(focus);
-  }, [inputRef]);
+    const inputFocus = inputRef?.current?.isFocused();
+    focus.value = inputFocus;
+  }, [inputRef, focus]);
 
-  // keyboardWillHide | keyboardWillShow | keyboardDidHide
+  // keyboardWillHide | keyboardWillShow | keyboardDidHide | keyboardDidShow
   React.useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', subscribe);
+    Keyboard.addListener('keyboardWillShow', subscribe);
     Keyboard.addListener('keyboardWillHide', subscribe);
     return () => {
-      Keyboard.removeListener('keyboardDidShow', subscribe);
+      Keyboard.removeListener('keyboardWillShow', subscribe);
       Keyboard.removeListener('keyboardWillHide', subscribe);
     };
   }, [subscribe]);
 
+  const animatedContainer = useAnimatedStyle(
+    () => ({
+      opacity: withTiming(focus.value ? 1 : 0.9, { duration: 1000 }),
+      transform: [{ translateY: withTiming(focus.value ? 0 : layout.height) }],
+    }),
+    [layout]
+  );
+
+  const animatedBackgroundContainerStyle = useAnimatedStyle(() => ({
+    height: focus.value ? layout.height : 0,
+  }));
+
   return (
-    <>
-      {isFocused && (
-        <View style={styles.container}>
-          {['chartreuse', 'darkorange', 'lightskyblue', 'mediumslateblue'].map(
-            (color, idx) => (
-              <TouchableOpacity key={idx}>
-                <View style={[styles.dot, { backgroundColor: color }]} />
-              </TouchableOpacity>
-            )
-          )}
-        </View>
-      )}
-    </>
+    <View>
+      <Animated.View style={animatedBackgroundContainerStyle} />
+      <Animated.View
+        style={[animatedContainer, styles.container]}
+        onLayout={onLayout}
+      >
+        {['chartreuse', 'darkorange', 'lightskyblue', 'mediumslateblue'].map(
+          (color, idx) => (
+            <TouchableOpacity key={idx}>
+              <View style={[styles.dot, { backgroundColor: color }]} />
+            </TouchableOpacity>
+          )
+        )}
+      </Animated.View>
+    </View>
   );
 };
 

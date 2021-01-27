@@ -63,11 +63,11 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       focus.value = false;
     };
 
-    const animatedButtonBackground = useAnimatedStyle(() => ({
+    const animatedButtonBackgroundStyle = useAnimatedStyle(() => ({
       width: withTiming(focus.value ? buttonLayout.width : 0),
     }));
 
-    const animatedButton = useAnimatedStyle(() => ({
+    const animatedButtonStyle = useAnimatedStyle(() => ({
       opacity: withDelay(
         focus.value ? 100 : 0,
         withTiming(focus.value ? 1 : 0)
@@ -82,7 +82,7 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       ],
     }));
 
-    const animatedCancelButton = useAnimatedStyle(() => ({
+    const animatedCancelButtonStyle = useAnimatedStyle(() => ({
       transform: [
         { scale: withTiming(!empty.value ? 1 : 0, { duration: 200 }) },
       ],
@@ -105,7 +105,7 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
           />
           <Animated.View
             style={[
-              animatedCancelButton,
+              animatedCancelButtonStyle,
               styles.clearIconContainer,
               rightIconContainerStyle,
             ]}
@@ -113,9 +113,9 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
             <TouchableOpacity onPress={onClear}>{clearIcon}</TouchableOpacity>
           </Animated.View>
         </View>
-        <Animated.View style={animatedButtonBackground} />
+        <Animated.View style={animatedButtonBackgroundStyle} />
         <Animated.View
-          style={[animatedButton, styles.cancelButtonContainer]}
+          style={[animatedButtonStyle, styles.cancelButtonContainer]}
           onLayout={onButtonLayout}
         >
           <TouchableOpacity onPress={onCancel}>
