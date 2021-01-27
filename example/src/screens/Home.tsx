@@ -10,16 +10,20 @@ import { Feather } from '@expo/vector-icons';
 import type { TextInput } from 'react-native';
 import faker from 'faker';
 
+const lorem = faker.lorem.paragraphs(8);
+
 const Home = () => {
   const inputRef = React.useRef<TextInput>(null);
   const [value, setValue] = React.useState('');
 
+  const addWord = () => setValue(`${value} ${faker.random.word()}`);
+
   const icons = [
-    { name: 'bookmark', onPress: () => setValue((text) => `${text}, is:`) },
-    { name: 'at-sign', onPress: () => setValue((text) => `${text}, is:`) },
-    { name: 'bar-chart-2', onPress: () => setValue((text) => `${text}, is:`) },
-    { name: 'star', onPress: () => setValue((text) => `${text}, is:`) },
-    { name: 'trash-2', onPress: () => setValue((text) => `${text}, is:`) },
+    { name: 'bookmark', onPress: () => addWord() },
+    { name: 'at-sign', onPress: () => addWord() },
+    { name: 'bar-chart-2', onPress: () => addWord() },
+    { name: 'star', onPress: () => addWord() },
+    { name: 'trash-2', onPress: () => addWord() },
   ];
 
   return (
@@ -42,7 +46,7 @@ const Home = () => {
         contentContainerStyle={styles.contentContainer}
         keyboardDismissMode="on-drag"
       >
-        <Text>{faker.lorem.paragraphs(8)}</Text>
+        <Text>{lorem}</Text>
       </ScrollView>
       <StickyBar inputRef={inputRef} containerStyle={styles.stickyBarStyle}>
         {icons.map(({ name, onPress }) => (
