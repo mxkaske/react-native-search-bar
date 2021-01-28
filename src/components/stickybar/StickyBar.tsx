@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, KeyboardEventListener, View } from 'react-native';
+import { Keyboard, KeyboardEventListener, Platform, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -11,6 +11,8 @@ import AnimatedButton from './AnimatedButton';
 import StickyBarIcon from './StickyBarIcon';
 import { styles } from './styles';
 import type { StickyBarProps } from './types';
+
+const isIOS = Platform.OS === 'ios';
 
 const StickyBar = ({
   inputRef,
@@ -30,11 +32,23 @@ const StickyBar = ({
 
   // keyboardWillHide | keyboardWillShow | keyboardDidHide | keyboardDidShow
   React.useEffect(() => {
-    Keyboard.addListener('keyboardWillShow', subscribe);
-    Keyboard.addListener('keyboardWillHide', subscribe);
+    Keyboard.addListener(
+      isIOS ? 'keyboardWillShow' : 'keyboardDidShow',
+      subscribe
+    );
+    Keyboard.addListener(
+      isIOS ? 'keyboardWillHide' : 'keyboardDidHide',
+      subscribe
+    );
     return () => {
-      Keyboard.removeListener('keyboardWillShow', subscribe);
-      Keyboard.removeListener('keyboardWillHide', subscribe);
+      Keyboard.removeListener(
+        isIOS ? 'keyboardWillShow' : 'keyboardDidShow',
+        subscribe
+      );
+      Keyboard.removeListener(
+        isIOS ? 'keyboardWillHide' : 'keyboardDidHide',
+        subscribe
+      );
     };
   }, [subscribe]);
 

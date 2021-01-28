@@ -21,7 +21,9 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       onBlur: onDefaultBlur,
       leftIconContainerStyle,
       rightIconContainerStyle,
+      cancelButtonTextStyle,
       clearTextOnCancel = false,
+      cancelText = 'Cancel',
       value,
       ...props
     },
@@ -129,7 +131,9 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
           onLayout={onButtonLayout}
         >
           <TouchableOpacity onPress={onCancel}>
-            <Text style={styles.cancelButtonText}>Cancel</Text>
+            <Text style={[styles.cancelButtonText, cancelButtonTextStyle]}>
+              {cancelText}
+            </Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
