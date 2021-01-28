@@ -6,12 +6,19 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useComponentLayout } from '../../hooks';
+import AnimatedButton from './AnimatedButton';
 import { styles } from './styles';
 import type { StickyBarProps } from './types';
 
-const StickyBar = ({ inputRef, children, containerStyle }: StickyBarProps) => {
+const StickyBar = ({
+  inputRef,
+  children,
+  containerStyle,
+  closeIcon,
+}: StickyBarProps) => {
   const { layout, onLayout } = useComponentLayout();
   const focus = useSharedValue(false);
+  const close = useSharedValue(false);
 
   const subscribe: KeyboardEventListener = React.useCallback(() => {
     // @ts-expect-error
@@ -32,7 +39,10 @@ const StickyBar = ({ inputRef, children, containerStyle }: StickyBarProps) => {
   const animatedContainer = useAnimatedStyle(
     () => ({
       opacity: withTiming(focus.value ? 1 : 0.9, { duration: 1000 }),
-      transform: [{ translateY: withTiming(focus.value ? 0 : layout.height) }],
+      transform: [
+        { translateY: withTiming(focus.value ? 0 : layout.height) },
+        { translateX: withTiming(close.value ? -layout.width + 80 : 0) },
+      ],
     }),
     [layout]
   );
@@ -43,12 +53,18 @@ const StickyBar = ({ inputRef, children, containerStyle }: StickyBarProps) => {
 
   return (
     <View>
-      <Animated.View style={animatedBackgroundContainerStyle} />
+      <Animated.View style={[animatedBackgroundContainerStyle]} />
       <Animated.View
         style={[animatedContainer, styles.container, containerStyle]}
         onLayout={onLayout}
       >
         {children}
+        <AnimatedButton
+          close={close}
+          onPress={() => (close.value = !close.value)}
+        >
+          {closeIcon}
+        </AnimatedButton>
       </Animated.View>
     </View>
   );
