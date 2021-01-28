@@ -39,6 +39,7 @@ const Home = () => {
         onClear={() => console.log('clear')}
         autoCorrect={false}
         value={value}
+        clearTextOnCancel
         onChangeText={(text) => setValue(text)}
       />
       <ScrollView
@@ -48,16 +49,22 @@ const Home = () => {
       >
         <Text>{lorem}</Text>
       </ScrollView>
-      <StickyBar inputRef={inputRef} containerStyle={styles.stickyBarStyle}>
+      <StickyBar
+        inputRef={inputRef}
+        containerStyle={styles.stickyBarStyle}
+        //closeIcon={<Feather name="x" color="white" size={24} />}
+      >
         {icons.map(({ name, onPress }) => (
-          <Feather.Button
-            //@ts-expect-error
-            name={name}
-            onPress={onPress}
-            color="white"
-            backgroundColor="black"
-            iconStyle={styles.iconStyle}
-          />
+          <StickyBar.Icon key={name}>
+            <Feather.Button
+              //@ts-expect-error
+              name={name}
+              onPress={onPress}
+              color="white"
+              backgroundColor="black"
+              iconStyle={styles.iconStyle}
+            />
+          </StickyBar.Icon>
         ))}
       </StickyBar>
     </KeyboardAvoidingView>
@@ -75,9 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'gold',
   },
-  stickyBarStyle: {
-    height: 50,
-  },
+  stickyBarStyle: {},
   iconStyle: { marginRight: 0 },
 });
 
