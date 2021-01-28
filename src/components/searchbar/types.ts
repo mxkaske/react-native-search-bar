@@ -17,6 +17,7 @@ export interface SearchBarProps extends TextInputProps {
   leftIconContainerStyle?: StyleProp<ViewProps>;
   // rightIcon
   rightIconContainerStyle?: StyleProp<ViewProps>;
+  clearTextOnCancel?: boolean;
 }
 
 export type TextInputEvent = NativeSyntheticEvent<TextInputFocusEventData>;

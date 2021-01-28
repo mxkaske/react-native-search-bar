@@ -21,6 +21,8 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       onBlur: onDefaultBlur,
       leftIconContainerStyle,
       rightIconContainerStyle,
+      clearTextOnCancel = false,
+      value,
       ...props
     },
     inputRef
@@ -41,6 +43,12 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       [onChangeTextDefault]
     );
 
+    // @todo
+    React.useEffect(() => {
+      onChangeText(value);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value]);
+
     const onClear = () => {
       // @ts-expect-error
       inputRef?.current?.clear();
@@ -51,6 +59,7 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
     const onCancel = () => {
       // @ts-expect-error
       inputRef?.current?.blur();
+      clearTextOnCancel && onClear();
     };
 
     const onFocus = (event: TextInputEvent) => {
@@ -101,6 +110,7 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
             onChangeText={onChangeText}
             onBlur={onBlur}
             onFocus={onFocus}
+            value={value}
             {...props}
           />
           <Animated.View
