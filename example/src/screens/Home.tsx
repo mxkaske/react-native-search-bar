@@ -1,34 +1,50 @@
 import * as React from 'react';
 import {
   StyleSheet,
-  ScrollView,
   KeyboardAvoidingView,
   Text,
+  FlatList,
+  View,
+  Platform,
 } from 'react-native';
 import { SearchBar, StickyBar } from 'react-native-search-bar';
 import { Feather } from '@expo/vector-icons';
 import type { TextInput } from 'react-native';
-import faker from 'faker';
 
-const lorem = faker.lorem.paragraphs(8);
+type Item = {
+  text: string;
+  name: string;
+};
+
+const isIOS = Platform.OS === 'ios';
 
 const Home = () => {
+  const [items, setItems] = React.useState<Item[]>([
+    { text: 'Hello World', name: 'check' },
+  ]);
   const inputRef = React.useRef<TextInput>(null);
   const [value, setValue] = React.useState('');
 
-  const addWord = () => setValue(`${value} ${faker.random.word()}`);
+  // const addWord = () => setValue(`${faker.random.word()}`);
+
+  const addItem = (name: string) => {
+    if (value !== '') {
+      setItems((currentItems) => [{ name, text: value }, ...currentItems]);
+      setValue('');
+    }
+  };
 
   const icons = [
-    { name: 'bookmark', onPress: () => addWord() },
-    { name: 'at-sign', onPress: () => addWord() },
-    { name: 'bar-chart-2', onPress: () => addWord() },
-    { name: 'star', onPress: () => addWord() },
-    { name: 'trash-2', onPress: () => addWord() },
+    { name: 'bookmark', onPress: () => addItem('bookmark') },
+    { name: 'check', onPress: () => addItem('check') },
+    { name: 'heart', onPress: () => addItem('heart') },
+    { name: 'hash', onPress: () => addItem('hash') },
+    { name: 'at-sign', onPress: () => addItem('at-sign') },
   ];
 
   return (
     <KeyboardAvoidingView
-      behavior="padding"
+      behavior={isIOS ? 'padding' : 'height'}
       style={styles.KeyboardAvoidingContainer}
     >
       <SearchBar
@@ -41,14 +57,22 @@ const Home = () => {
         value={value}
         clearTextOnCancel
         onChangeText={(text) => setValue(text)}
+        cancelButtonTextStyle={styles.cancelButtonTextStyle}
       />
-      <ScrollView
+      <FlatList
+        data={items}
+        keyExtractor={(item, index) => `${item.text}-${index}`}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainerStyle}>
+            {/* @ts-expect-error */}
+            <Feather name={item.name} color="black" size={16} />
+            <Text style={styles.itemTextStyle}>{item.text}</Text>
+          </View>
+        )}
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         keyboardDismissMode="on-drag"
-      >
-        <Text>{lorem}</Text>
-      </ScrollView>
+      />
       <StickyBar
         inputRef={inputRef}
         containerStyle={styles.stickyBarStyle}
@@ -60,7 +84,7 @@ const Home = () => {
               //@ts-expect-error
               name={name}
               onPress={onPress}
-              color="white"
+              color="gold"
               backgroundColor="black"
               iconStyle={styles.iconStyle}
             />
@@ -83,7 +107,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'gold',
   },
   stickyBarStyle: {},
+  cancelButtonTextStyle: { color: 'gold' },
   iconStyle: { marginRight: 0 },
+  itemContainerStyle: {
+    flexDirection: 'row',
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    marginBottom: 12,
+  },
+  itemTextStyle: {
+    paddingLeft: 8,
+  },
 });
 
 export default Home;
