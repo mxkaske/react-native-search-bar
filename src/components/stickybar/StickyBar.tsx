@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Keyboard, KeyboardEventListener } from 'react-native';
+import { Keyboard, KeyboardEventListener, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { StickyBarProvider } from '../../contexts';
 import { useComponentLayout } from '../../hooks';
 import AnimatedButton from './AnimatedButton';
+import StickyBarIcon from './StickyBarIcon';
 import { styles } from './styles';
 import type { StickyBarProps } from './types';
 
@@ -52,22 +54,28 @@ const StickyBar = ({
   }));
 
   return (
-    <View>
-      <Animated.View style={[animatedBackgroundContainerStyle]} />
-      <Animated.View
-        style={[animatedContainer, styles.container, containerStyle]}
-        onLayout={onLayout}
-      >
-        {children}
-        <AnimatedButton
-          close={close}
-          onPress={() => (close.value = !close.value)}
+    <StickyBarProvider value={{ focus, close }}>
+      <View>
+        <Animated.View style={[animatedBackgroundContainerStyle]} />
+        <Animated.View
+          style={[animatedContainer, styles.container, containerStyle]}
+          onLayout={onLayout}
         >
-          {closeIcon}
-        </AnimatedButton>
-      </Animated.View>
-    </View>
+          {children}
+          {closeIcon ? (
+            <AnimatedButton
+              close={close}
+              onPress={() => (close.value = !close.value)}
+            >
+              {closeIcon}
+            </AnimatedButton>
+          ) : null}
+        </Animated.View>
+      </View>
+    </StickyBarProvider>
   );
 };
+
+StickyBar.Icon = StickyBarIcon;
 
 export default StickyBar;
