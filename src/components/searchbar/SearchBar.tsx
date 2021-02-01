@@ -2,13 +2,12 @@ import React from 'react';
 import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import type { SearchBarProps, TextInputEvent } from './types';
 import { styles } from './styles';
-import { useComponentLayout } from '../../hooks';
+import { useComponentLayout, useSearchBar } from '../../hooks';
 
 const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
   (
@@ -27,17 +26,15 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       containerStyle,
       inputContainerStyle,
       cancelButtonContainerStyle,
-      //value,
       ...props
     },
     ref
   ) => {
-    console.log(ref);
     const localRef = React.useRef<TextInput>(null);
     const inputRef = ref || localRef;
 
-    const empty = useSharedValue(true);
-    const focus = useSharedValue(false);
+    const { setText, empty, focus } = useSearchBar();
+
     const {
       layout: buttonLayout,
       onLayout: onButtonLayout,
@@ -47,16 +44,11 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       (text) => {
         onChangeTextDefault && onChangeTextDefault(text);
         empty.value = text === '';
+        setText(text);
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [onChangeTextDefault]
     );
-
-    // @todo
-    // React.useEffect(() => {
-    //   onChangeText(value);
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [value]);
 
     const onClear = () => {
       // @ts-expect-error
@@ -119,7 +111,6 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
             onChangeText={onChangeText}
             onBlur={onBlur}
             onFocus={onFocus}
-            //value={value}
             {...props}
           />
           <Animated.View
