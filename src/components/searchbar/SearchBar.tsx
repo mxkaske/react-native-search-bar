@@ -24,11 +24,18 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
       cancelButtonTextStyle,
       clearTextOnCancel = false,
       cancelText = 'Cancel',
-      value,
+      containerStyle,
+      inputContainerStyle,
+      cancelButtonContainerStyle,
+      //value,
       ...props
     },
-    inputRef
+    ref
   ) => {
+    console.log(ref);
+    const localRef = React.useRef<TextInput>(null);
+    const inputRef = ref || localRef;
+
     const empty = useSharedValue(true);
     const focus = useSharedValue(false);
     const {
@@ -46,10 +53,10 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
     );
 
     // @todo
-    React.useEffect(() => {
-      onChangeText(value);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value]);
+    // React.useEffect(() => {
+    //   onChangeText(value);
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [value]);
 
     const onClear = () => {
       // @ts-expect-error
@@ -100,8 +107,8 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
     }));
 
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
+      <View style={[styles.container, containerStyle]}>
+        <View style={[styles.inputContainer, inputContainerStyle]}>
           <View style={[styles.searchIconContainer, leftIconContainerStyle]}>
             {searchIcon}
           </View>
@@ -112,7 +119,7 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
             onChangeText={onChangeText}
             onBlur={onBlur}
             onFocus={onFocus}
-            value={value}
+            //value={value}
             {...props}
           />
           <Animated.View
@@ -127,7 +134,11 @@ const SearchBar = React.forwardRef<TextInput, SearchBarProps>(
         </View>
         <Animated.View style={animatedButtonBackgroundStyle} />
         <Animated.View
-          style={[animatedButtonStyle, styles.cancelButtonContainer]}
+          style={[
+            animatedButtonStyle,
+            styles.cancelButtonContainer,
+            cancelButtonContainerStyle,
+          ]}
           onLayout={onButtonLayout}
         >
           <TouchableOpacity onPress={onCancel}>

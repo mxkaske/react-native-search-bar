@@ -6,6 +6,7 @@ import type {
   TextInputProps,
   TextStyle,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 
 export interface SearchBarProps extends TextInputProps {
@@ -20,7 +21,10 @@ export interface SearchBarProps extends TextInputProps {
   rightIconContainerStyle?: StyleProp<ViewProps>;
   clearTextOnCancel?: boolean;
   cancelButtonTextStyle?: StyleProp<TextStyle>;
+  cancelButtonContainerStyle?: StyleProp<ViewStyle>;
   cancelText?: string;
+  containerStyle?: StyleProp<ViewStyle>;
+  inputContainerStyle?: StyleProp<ViewStyle>;
 }
 
 export type TextInputEvent = NativeSyntheticEvent<TextInputFocusEventData>;
